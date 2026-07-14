@@ -368,4 +368,14 @@ document.getElementById("expense-amount").addEventListener('keydown', (event) =>
 
 
 
-buildCalendar();
+// MOBILE INTERACTION ENGINE: Moves month arrows to the footer row if on mobile screens
+if (window.innerWidth <= 600) {
+    const navArrows = document.querySelector(".nav-buttons");
+    const footerContainer = document.querySelector(".calendar-footer");
+    // Appends the arrow wrapper to the footer container dynamically on startup
+    if (navArrows && footerContainer) {
+        footerContainer.appendChild(navArrows);
+    }
+}
+
+buildCalendar(); 
