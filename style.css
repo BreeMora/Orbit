@@ -679,6 +679,11 @@ body {
         /* Forces header components to never collapse in size */
     }
 
+    /* Keeps the top header strictly clear for your metric labels */
+    .calendar-header .nav-buttons {
+        display: none !important;
+    }
+
     .header-info {
         display: flex;
         justify-content: space-between;
@@ -783,40 +788,55 @@ body {
         border-radius: 3px;
     }
 
-    /* 7. Footer Layout Toolbar: Keeps buttons locked to the screen base */
+    /* 7. Footer Layout Toolbar: Symmetrical Navigation & Action Row */
     .calendar-footer {
         display: flex !important;
         flex-direction: row !important;
-        /* Lateral alignment row fits everything neatly */
         justify-content: space-between !important;
         align-items: center !important;
-        gap: 8px !important;
+        gap: 10px !important;
         width: 100% !important;
-        padding-top: 8px !important;
+        padding-top: 10px !important;
         border-top: 1px solid var(--border-color);
         flex-shrink: 0;
-        /* Guaranteed to stay locked at the bottom */
         margin-top: 0px !important;
     }
 
-    .bulk-trigger-btn {
-        flex: 1;
-        font-size: 0.75rem;
-        padding: 10px;
-        border-radius: 10px;
+    /* RESTORES AND RESHAPES NAVIGATION ARROWS AT THE BOTTOM */
+    .calendar-footer .nav-buttons {
+        display: flex !important;
+        /* Forces the arrows to reappear at the bottom */
+        gap: 8px;
+        align-items: center;
+    }
+
+    .nav-btn {
+        width: 42px !important;
+        /* Comfortable mobile touch sizing */
+        height: 42px !important;
+        border-radius: 50%;
+        padding: 0;
+        display: flex;
+        align-items: center;
         justify-content: center;
     }
 
-    .data-actions-group {
-        display: flex;
-        gap: 6px;
+    .nav-btn svg {
+        width: 20px !important;
+        height: 20px !important;
     }
 
-    .data-actions-group .btn {
-        font-size: 0.75rem;
-        padding: 10px;
-        border-radius: 10px;
+    /* Centers the bulk button right between your arrows */
+    .bulk-trigger-btn {
+        flex-grow: 1;
+        /* Automatically stretches to fill the center space */
+        font-size: 0.8rem;
+        padding: 12px;
+        border-radius: 12px;
+        justify-content: center;
+        font-weight: 700;
     }
+
 
     /* 8. Thumb-Centered Pop-up Modals Overhaul */
     .modal-box {
