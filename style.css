@@ -635,3 +635,212 @@ body {
         justify-content: center;
     }
 }
+
+/* =========================================================================
+   ORBIT STRICT CONTAINER MOBILE ENGINE (Zero Overflow Alignment Layout)
+   ========================================================================= */
+@media (max-width: 600px) {
+
+    /* 1. Canvas Normalization: Eliminate structural page centering */
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: var(--bg-card);
+        align-items: flex-start;
+        overflow: hidden;
+        /* Blocks all bouncing webpage scrolling artifacts */
+    }
+
+    /* 2. Main Wrapper Box: Full viewport bounding containment */
+    .calendar-wrapper {
+        border-radius: 0px;
+        border: none;
+        box-shadow: none;
+        padding: 16px;
+        width: 100vw;
+        height: 100vh;
+        /* Constrains the app strictly inside the glass dimensions */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Safely sandboxes header, grid, and footer */
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    /* 3. Header Normalization: Strips old desktop flex elements */
+    .calendar-header {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 8px;
+        flex-shrink: 0;
+        /* Forces header components to never collapse in size */
+    }
+
+    .header-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .month-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    /* Stretches tabs cleanly below the month title */
+    .view-switcher {
+        width: 100%;
+        display: flex;
+        background: #f1f5f9;
+        padding: 3px;
+        border-radius: 10px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        text-align: center;
+        padding: 8px 2px;
+        font-size: 0.75rem;
+    }
+
+    /* FORCED POSITIONING: Repositions navigation arrows to sit next to the bottom menu */
+    .nav-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .nav-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* 4. Weekday Single-Letter Layout Header Rules */
+    .weekday-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding-bottom: 4px;
+        text-align: center;
+    }
+
+    /* 5. Fluid Grid Framework Engine: Prevents overlap on the bulk button */
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        /* FLUID DISTRIBUTION: Uses remaining screen space without rigid row pixels */
+        grid-auto-rows: minmax(0, 1fr);
+        gap: 0px 4px;
+        flex-grow: 1;
+        /* Automatically consumes the layout center perfectly */
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    /* 6. Strict Dimensional Day Cells (Fixes Bug #4 - Gradient Size Shifts) */
+    .day-cell {
+        width: 100%;
+        height: 100% !important;
+        /* Forces cards to stay inside their grid bounds */
+        max-height: 72px !important;
+        /* Stops linear-gradients from stretching cells */
+        padding: 5px;
+        margin-bottom: 0px;
+        /* Switches to crisp flush alignment on phones to prevent crowding */
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box !important;
+        position: relative;
+    }
+
+    /* Clean mobile scaling inside day cards */
+    .day-number {
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .cell-note {
+        font-size: 0.55rem;
+        line-height: 1.1;
+        margin-top: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    .cell-expense-badge {
+        position: absolute;
+        bottom: 3px;
+        right: 3px;
+        font-size: 0.55rem;
+        padding: 0px 2px;
+        border-radius: 3px;
+    }
+
+    /* 7. Footer Layout Toolbar: Keeps buttons locked to the screen base */
+    .calendar-footer {
+        display: flex !important;
+        flex-direction: row !important;
+        /* Lateral alignment row fits everything neatly */
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        padding-top: 8px !important;
+        border-top: 1px solid var(--border-color);
+        flex-shrink: 0;
+        /* Guaranteed to stay locked at the bottom */
+        margin-top: 0px !important;
+    }
+
+    .bulk-trigger-btn {
+        flex: 1;
+        font-size: 0.75rem;
+        padding: 10px;
+        border-radius: 10px;
+        justify-content: center;
+    }
+
+    .data-actions-group {
+        display: flex;
+        gap: 6px;
+    }
+
+    .data-actions-group .btn {
+        font-size: 0.75rem;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    /* 8. Thumb-Centered Pop-up Modals Overhaul */
+    .modal-box {
+        width: 92% !important;
+        max-width: 100% !important;
+        padding: 16px !important;
+        border-radius: 16px !important;
+    }
+
+    .choice-actions-grid {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .choice-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 0.9rem;
+    }
+
+    .modal-box input[type="text"],
+    .modal-box input[type="number"] {
+        padding: 12px !important;
+        font-size: 1rem !important;
+        /* Standard phone text scale stops screen stutter */
+    }
+}
