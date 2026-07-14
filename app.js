@@ -271,7 +271,7 @@ document.getElementById("btn-bulk-fridays").addEventListener('click', () => {
     for (let d = 1; d <= totalDays; d++) {
         const checkDate = new Date(year, month, d);
         if (checkDate.getDay() === 5) {
-            myCustomHolidays[ `${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}` ] = "Sum F";
+            myCustomHolidays[ `${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}` ] = "Half F";
         }
     }
 
