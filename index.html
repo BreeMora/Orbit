@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Official App Branding Setup -->
+    <title>Orbit</title>
+
+    <!-- iOS Native App Emulation Layer Custom Styling -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Orbit">
+
+
+    <!-- Typography Engine Link -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet and Brain Controller Links -->
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Main Board Wrapper Sheet -->
+    <main class="calendar-wrapper">
+
+        <!-- Fixed Structural Navigation Header Box -->
+        <header class="calendar-header">
+            <div class="header-info">
+                <h2 class="month-title" id="month-name-display">Month Year</h2>
+                <div class="metrics-container">
+                    <span class="metric-badge" id="month-total-expenses" data-visible="false">Month Total: $0.00</span>
+                    <span class="metric-badge" id="month-free-days" data-visible="false">Free Days: 0</span>
+                </div>
+            </div>
+
+            <!-- Context Layout View Switch Tab Buttons -->
+            <nav class="view-switcher" id="view-tabs">
+                <button class="tab-btn active" data-view="default">Overview</button>
+                <button class="tab-btn" data-view="calendar">Agenda Only</button>
+                <button class="tab-btn" data-view="expenses">Expenses Only</button>
+            </nav>
+
+            <!-- Month Shifting Arrow Controls -->
+            <div class="nav-buttons">
+                <button class="nav-btn" id="btn-prev-month" aria-label="Previous month">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <button class="nav-btn" id="btn-next-month" aria-label="Next month">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stacking Matrix Cards Area Grid Container -->
+        <section class="calendar-grid" id="calendar-grid-container"></section>
+
+        <!-- Bottom Controls Dashboard Drawer Toolbar -->
+        <footer class="calendar-footer">
+            <button class="btn bulk-trigger-btn" id="btn-open-bulk" type="button">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                </svg>
+                Bulk Configuration (Ranges)
+            </button>
+        </footer>
+    </main>
+
+    <!-- INTERFACE POP-UP DIALOG BOX OVERLAYS -->
+
+    <!-- 1. Multi-Purpose Daily Log Entry Modal Window -->
+    <div class="modal-overlay" id="note-modal" data-active="false">
+        <div class="modal-box">
+            <header class="modal-header">
+                <h3 id="modal-date-title">Day Details</h3>
+                <button class="close-modal-btn" id="btn-close-modal" aria-label="Close dialog">&times;</button>
+            </header>
+
+            <!-- SHARED LOGS COMPONENT CONTAINER: Always anchors strictly at the absolute top of the box layout -->
+            <div class="dynamic-notes-list" id="modal-general-list"></div>
+
+            <!-- Panel Screen A: Main Dashboard Choice Panel (Overview Tab) -->
+            <div class="modal-flow-section" id="form-general-summary">
+                <div class="choice-actions-grid" id="modal-choice-screen">
+                    <button class="btn choice-btn" id="btn-choose-agenda" type="button">Requested Day ✈️</button>
+                    <button class="btn choice-btn" id="btn-choose-expense" type="button">Log Expense 💰</button>
+                </div>
+            </div>
+
+            <!-- Panel Screen B: Free Day Vacation Input Form Section -->
+            <div class="modal-flow-section" id="form-agenda" style="display: none;">
+                <input type="text" id="note-input" placeholder="e.g., Vacation or Personal Day 🌊">
+                <div class="modal-buttons-row">
+                    <button class="btn btn-muted" onclick="resetModalWorkflow()" type="button">Back</button>
+                    <button class="btn btn-accent-personal" id="btn-save-note" type="button">Save Free Day</button>
+                </div>
+            </div>
+
+            <!-- Panel Screen C: Financial Purchase Entry Input Form Section -->
+            <div class="modal-flow-section" id="form-expenses" style="display: none;">
+                <div class="inputs-inline-group">
+                    <input type="text" id="expense-concept" placeholder="e.g., Uber or Coffee ☕">
+                    <input type="number" id="expense-amount" placeholder="$ Amount">
+                </div>
+                <div class="modal-buttons-row">
+                    <button class="btn btn-muted" onclick="resetModalWorkflow()" type="button">Back</button>
+                    <button class="btn btn-accent-expense" id="btn-save-expense" type="button">Log Expense</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Dual-Click Automated Sequential Batch Range Overlay Drawer -->
+    <div class="modal-overlay" id="bulk-modal" data-active="false">
+        <div class="modal-box max-w-bulk">
+            <header class="modal-header">
+                <h3>Bulk Settings</h3>
+                <button class="close-modal-btn" id="btn-close-bulk" aria-label="Close dialog">&times;</button>
+            </header>
+
+            <!-- Module Card 1: Friday half-day automation -->
+            <fieldset class="bulk-card-section">
+                <legend>1. Recurrent Half Days</legend>
+                <p>Automatically flags every Friday of the currently active month as "Half Day Off".</p>
+                <button class="btn btn-accent-custom" id="btn-bulk-fridays" type="button">Apply to all Fridays</button>
+            </fieldset>
+
+            <!-- Module Card 2: Single-box input continuous sequence span tracker -->
+            <fieldset class="bulk-card-section">
+                <legend>2. Request Time-Off Period</legend>
+                <p id="bulk-instruction-text">Select your <b>Start Date</b> using the box below.</p>
+                <div class="inputs-inline-group">
+                    <input type="date" id="bulk-start-date" aria-label="Dynamic date picker element field box tracker">
+                </div>
+                <button class="btn btn-accent-personal" id="btn-bulk-range" type="button">Schedule Vacation
+                    Period</button>
+            </fieldset>
+
+            <!-- Section 3: Dual-Action Bulk Wipe Panel -->
+            <fieldset class="bulk-card-section" style="border-color: #fca5a5; background: #fff5f5; margin-top: 16px;">
+                <legend style="color: #dc2626;">3. Bulk Remove Options</legend>
+                <p style="color: #991b1b; margin-bottom: 14px;">Wipes targeted data strictly within the date range
+                    locked above.</p>
+
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" id="btn-wipe-personal" type="button"
+                        style="flex: 1; background: #dc2626; color: white; padding: 12px 8px; font-size: 0.8rem; border-radius: 10px;">
+                        Remove Free Days ✈️
+                    </button>
+                    <button class="btn" id="btn-wipe-corporate" type="button"
+                        style="flex: 1; background: #ea580c; color: white; padding: 12px 8px; font-size: 0.8rem; border-radius: 10px;">
+                        Remove Half Days 💼
+                    </button>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
