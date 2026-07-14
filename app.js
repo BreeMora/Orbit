@@ -57,8 +57,18 @@ function applyCellColorsAndTexts(cell, textLabel, year, month, day, yearHolidays
 function buildCalendar() {
     const grid = document.getElementById("calendar-grid-container"); const displayTitle = document.getElementById("month-name-display"); grid.innerHTML = '';
     const currentYear = State.currentDate.getFullYear(), currentMonth = State.currentDate.getMonth(), yearHolidays = calculateMexicoHolidays(currentYear); displayTitle.innerText = `${monthsEn[ currentMonth ]} ${currentYear}`;
-    dayLabelsArr.forEach(l => { const h = document.createElement("div"); h.className = "weekday-label"; h.innerText = l; grid.appendChild(h); });
+    // Responsive Header labels optimizer loop
+    const isMobileViewport = window.innerWidth <= 600;
+    dayLabelsArr.forEach(l => {
+        const h = document.createElement("div");
+        h.className = "weekday-label";
+        // Displays single character (S, M, T) on phones, full label (Sun, Mon) on Desktop
+        h.innerText = isMobileViewport ? l.charAt(0) : l;
+        grid.appendChild(h);
+    });
+
     const firstWeekdayIndex = new Date(currentYear, currentMonth, 1).getDay(), totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(), totalDaysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
     let monthlyTotalSum = 0, monthlyFreeDaysCount = 0;
 
     const prevMonthDate = new Date(currentYear, currentMonth - 1, 1);

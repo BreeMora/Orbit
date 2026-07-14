@@ -482,3 +482,156 @@ body {
     border: 2px dashed var(--text-personal) !important;
     background-color: #fdf4ff !important;
 }
+
+/* =========================================================================
+   ORBIT MOBILE FLUID RESPONSE ENGINE (Optimized for iPhone Viewports)
+   ========================================================================= */
+@media (max-width: 600px) {
+
+    /* 1. Canvas Adjustments: Strip margins so the app stretches to edges */
+    body {
+        padding: 0;
+        background-color: var(--bg-card);
+        /* Seamless flow */
+        align-items: flex-start;
+    }
+
+    /* 2. Main Wrapper Box: Becomes full-screen fluid */
+    .calendar-wrapper {
+        border-radius: 0px;
+        border: none;
+        box-shadow: none;
+        padding: 16px;
+        height: 100vh;
+        /* Fills terminal device bounds perfectly */
+    }
+
+    /* 3. Header Compression: Stacks columns neatly for thumb actions */
+    .calendar-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        margin-bottom: 16px;
+    }
+
+    .header-info {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .month-title {
+        font-size: 1.4rem;
+    }
+
+    /* Tabs view conmuters stretch wide for easy mobile clicks */
+    .view-switcher {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .tab-btn {
+        flex: 1;
+        text-align: center;
+        padding: 10px 4px;
+        font-size: 0.8rem;
+    }
+
+    /* Center floating navigation month buttons */
+    .nav-buttons {
+        display: none;
+        /* We will use mobile-first swipe or discrete placements later */
+    }
+
+    /* 4. Weekly Header Overrides: Shrink day labels to 1 single letter (S M T W T F S) */
+    .weekday-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        padding-bottom: 8px;
+    }
+
+    /* 5. Mobile Cascading Overlap Matrix Grid (Crucial Touch Target Overhaul) */
+    .calendar-grid {
+        grid-auto-rows: 62px;
+        /* Tightens density to prevent viewport clipping */
+        gap: 0px 4px;
+        /* Narrow gaps fit small phone screens flawlessly */
+    }
+
+    .day-cell {
+        height: 70px;
+        /* Slightly taller than row bound to execute stacking cascade */
+        border-radius: 8px;
+        padding: 6px;
+        margin-bottom: -8px;
+        /* Preserves your beloved stacked card aesthetic look */
+    }
+
+    .day-number {
+        font-size: 0.95rem;
+    }
+
+    /* Shinks inner texts inside mobile day nodes to prevent clipping strings */
+    .cell-note {
+        font-size: 0.55rem;
+        margin-top: 2px;
+        max-width: 100%;
+    }
+
+    .cell-expense-badge {
+        bottom: 4px;
+        right: 4px;
+        font-size: 0.55rem;
+        padding: 0px 3px;
+        border-radius: 3px;
+    }
+
+    /* 6. Mobile Pop-up Windows Overhaul (Thumb-Centered Layout Architecture) */
+    .modal-box {
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 20px 16px !important;
+        border-radius: 20px !important;
+        bottom: 10px;
+        /* Positions pop-ups closer to bottom screen for quick reach */
+    }
+
+    .choice-actions-grid {
+        flex-direction: column;
+        /* Stacks selection buttons into massive touch rows */
+        gap: 10px;
+    }
+
+    .choice-btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 0.95rem;
+    }
+
+    .modal-box input[type="text"],
+    .modal-box input[type="number"] {
+        padding: 14px !important;
+        /* Larger textboxes are vastly easier to type inside */
+        font-size: 1rem !important;
+        /* Prevents mobile Safari from executing auto-zoom lag resets */
+    }
+
+    /* 7. Footer controls toolbar refactor */
+    .calendar-footer {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    .bulk-trigger-btn,
+    .data-actions-group {
+        width: 100% !important;
+    }
+
+    .data-actions-group .btn {
+        flex: 1;
+        justify-content: center;
+    }
+}
