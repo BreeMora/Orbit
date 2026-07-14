@@ -64,15 +64,28 @@
         <!-- Stacking Matrix Cards Area Grid Container -->
         <section class="calendar-grid" id="calendar-grid-container"></section>
 
-        <!-- Bottom Controls Dashboard Drawer Toolbar -->
+        <!-- Symmetrical 3-Part Footer Toolbar Engine -->
         <footer class="calendar-footer">
-            <button class="btn bulk-trigger-btn" id="btn-open-bulk" type="button">
-                <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            <!-- Part A: Previous Month Trigger -->
+            <button class="nav-btn-mobile" id="mobile-btn-prev" type="button" aria-label="Previous Month">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
-                Bulk Configuration (Ranges)
+            </button>
+
+            <!-- Part B: Main Centered Configurations Action -->
+            <button class="btn bulk-trigger-btn" id="btn-open-bulk" type="button">
+                Bulk Settings ⚙️
+            </button>
+
+            <!-- Part C: Next Month Trigger -->
+            <button class="nav-btn-mobile" id="mobile-btn-next" type="button" aria-label="Next Month">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
             </button>
         </footer>
+
     </main>
 
     <!-- INTERFACE POP-UP DIALOG BOX OVERLAYS -->

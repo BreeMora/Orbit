@@ -378,4 +378,18 @@ if (window.innerWidth <= 600) {
     }
 }
 
+// MOBILE NAVIGATION INTERCEPTORS: Wires the new footer circles to the master state engine
+document.getElementById("mobile-btn-prev").addEventListener('click', () => {
+    State.currentDate.setMonth(State.currentDate.getMonth() - 1);
+    buildCalendar();
+});
+
+document.getElementById("mobile-btn-next").addEventListener('click', () => {
+    State.currentDate.setMonth(State.currentDate.getMonth() + 1);
+    buildCalendar();
+});
+
+// Also make sure you delete that experimental "window.innerWidth" swap loop we pasted in the previous message!
+
+
 buildCalendar(); 

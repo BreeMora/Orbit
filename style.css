@@ -788,53 +788,62 @@ body {
         border-radius: 3px;
     }
 
-    /* 7. Footer Layout Toolbar: Symmetrical Navigation & Action Row */
+    /* 7. Footer Layout Toolbar: Symmetrical Navigation & Action Row Wrapper */
     .calendar-footer {
         display: flex !important;
         flex-direction: row !important;
         justify-content: space-between !important;
         align-items: center !important;
-        gap: 10px !important;
+        gap: 12px !important;
         width: 100% !important;
-        padding-top: 10px !important;
+        padding-top: 12px !important;
         border-top: 1px solid var(--border-color);
         flex-shrink: 0;
-        margin-top: 0px !important;
+        margin-top: auto !important;
+        /* Pushes the entire deck firmly to the base of the glass */
+        box-sizing: border-box !important;
     }
 
-    /* RESTORES AND RESHAPES NAVIGATION ARROWS AT THE BOTTOM */
-    .calendar-footer .nav-buttons {
+    /* Professional Floating Circle Navigation Targets */
+    .nav-btn-mobile {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        width: 44px !important;
+        /* Large, ergonomic touch weight for mobile thumbs */
+        height: 44px !important;
+        border-radius: 50% !important;
+        cursor: pointer;
         display: flex !important;
-        /* Forces the arrows to reappear at the bottom */
-        gap: 8px;
-        align-items: center;
-    }
-
-    .nav-btn {
-        width: 42px !important;
-        /* Comfortable mobile touch sizing */
-        height: 42px !important;
-        border-radius: 50%;
-        padding: 0;
-        display: flex;
         align-items: center;
         justify-content: center;
+        color: var(--text-main);
+        flex-shrink: 0 !important;
+        padding: 0 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     }
 
-    .nav-btn svg {
+    .nav-btn-mobile svg {
         width: 20px !important;
         height: 20px !important;
+        fill: currentColor;
     }
 
-    /* Centers the bulk button right between your arrows */
+    /* Clean mobile scaling for the centered bulk button */
     .bulk-trigger-btn {
-        flex-grow: 1;
-        /* Automatically stretches to fill the center space */
-        font-size: 0.8rem;
-        padding: 12px;
-        border-radius: 12px;
-        justify-content: center;
-        font-weight: 700;
+        flex-grow: 1 !important;
+        /* Gracefully fills up the remaining center row space */
+        font-size: 0.8rem !important;
+        padding: 12px !important;
+        border-radius: 12px !important;
+        justify-content: center !important;
+        font-weight: 700 !important;
+        background: #f1f5f9 !important;
+        border: 1px solid var(--border-color) !important;
+        color: var(--text-main) !important;
+        height: 44px !important;
+        /* Matches height perfectly with navigation loops */
+        display: flex;
+        align-items: center;
     }
 
 
